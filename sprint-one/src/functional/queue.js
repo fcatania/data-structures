@@ -11,15 +11,9 @@ var Queue = function() {
   };
 
   someInstance.dequeue = function() {
-    for (var key in storage) {
-      var holder = storage[key];
-      delete storage[key];
-      someInstance.refactorStorage();
-      return holder;
-    }
-  };
+    var holder = storage[0];
+    delete storage[0];
 
-  someInstance.refactorStorage = function() {
     var newStorage = {};
     var i = 0;
     for (var key in storage) {
@@ -27,7 +21,9 @@ var Queue = function() {
       i++;
     }
     storage = newStorage;
-  }
+    
+    return holder;
+  };
 
   someInstance.size = function() {
     return Object.keys(storage).length;
